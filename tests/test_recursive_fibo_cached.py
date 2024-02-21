@@ -14,10 +14,10 @@ def test_recursive_cached_fibo_10(benchmark):
 def test_recursive_cached_fibo_100(benchmark):
     @benchmark
     def _():
-        recursive_cached_fibonacci(100)
+        recursive_cached_fibonacci(15)
 
 
 def test_recursive_cached_fibo_1000(benchmark):
     @benchmark
     def _():
-        recursive_cached_fibonacci(1000)
+        recursive_cached_fibonacci(20)

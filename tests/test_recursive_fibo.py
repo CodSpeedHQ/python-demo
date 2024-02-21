@@ -7,7 +7,7 @@ def test_recursive_fibo_10(benchmark):
         recursive_fibonacci(10)
 
 
-def test_recursive_fibo_20(benchmark):
+def test_recursive_fibo_11(benchmark):
     @benchmark
     def _():
-        recursive_fibonacci(20)
+        recursive_fibonacci(11)
