@@ -20,3 +20,4 @@ jobs:
         with:
           upload-url: https://api.staging.preview.codspeed.io/upload
           run: pytest tests/ --codspeed
+          runner-version: 2.1.2-beta.1
