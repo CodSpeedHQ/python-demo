@@ -16,9 +16,8 @@ jobs:
           python-version: "3.12"
       - run: pip install -r requirements.txt
 
-      - uses: CodSpeedHQ/action@v2
+      - uses: CodSpeedHQ/action@main
         with:
           upload-url: https://api.staging.preview.codspeed.io/upload
           run: pytest tests/ --codspeed
-          runner-version: 2.1.2-beta.3
           token: ${{ secrets.CODSPEED_TOKEN }}
