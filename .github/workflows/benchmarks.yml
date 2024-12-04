@@ -11,12 +11,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - uses: actions/setup-python@v3
+      - uses: conda-incubator/setup-miniconda@v3
         with:
-          python-version: '3.10'
-      - run: pip install -r requirements.txt
+          environment-file: environment.yml
+          activate-environment: my_env
+          use-mamba: true
 
-      - uses: CodSpeedHQ/action@feat/tokenless-upload
+      - uses: CodSpeedHQ/action@v3
         with:
-          upload_url: https://api.staging.preview.codspeed.io/upload
-          run: pytest tests/ --codspeed
+          run: conda run -n my_env pytest tests/ --codspeed
