@@ -11,12 +11,13 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - uses: actions/setup-python@v3
-        with:
-          python-version: '3.10'
-      - run: pip install -r requirements.txt
-
-      - uses: CodSpeedHQ/action@feat/tokenless-upload
-        with:
-          upload_url: https://api.staging.preview.codspeed.io/upload
-          run: pytest tests/ --codspeed
+      - name: Run CodSpeed in docker
+        run: |
+          # create .env file with the content of the `env` command
+          env > .env
+          # build the image
+          docker buildx build . -t python-image
+          # run the container with a long running command, in privileged mode and bind the event.json file
+          docker run -d --privileged --name python -v /home/runner/work/_temp/_github_workflow/event.json:/home/runner/work/_temp/_github_workflow/event.json python-image tail -f /dev/null
+          # run codspeed in the container
+          docker exec --env-file .env python sh -c "/root/.cargo/bin/codspeed run -- pytest tests/ --codspeed"
